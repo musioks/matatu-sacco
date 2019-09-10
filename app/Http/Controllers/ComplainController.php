@@ -10,30 +10,31 @@ use Illuminate\Support\Facades\Storage;
 
 class ComplainController extends Controller
 {
-     public function index()
+    public function index()
     {
-      return view('complains.complains');
+        return view('complains.complains');
     }
+
     public function postComplain(Request $request)
     {
-    	$this->validate($request, [
-    		'name'=>'required|min:4',
-    		'phone'=>'required|numeric|min:10',
-    		'email'=>'required|email',
-    		'pic'=>'required|mimes:jpeg,bmp,png,png',
-    		'description'=>'required|min:20'
-    	]);
-    	if ($request->hasFile('pic')) {
-        $filename  = time() . '.' . $request->pic->getClientOriginalExtension();
-        $request->pic->move('/complainpics',$filename);
-      }   
-    	$complain=new Complain;
-      $complain->name=$request->name;
-      $complain->phone=$request->phone;
-      $complain->email=$request->email;
-      $complain->pic=$filename;
-      $complain->description=$request->description;
-      $complain->save();
-      return redirect('/')->with('success','complain launched successful');
+        $this->validate($request, [
+            'name' => 'required|min:4',
+            'phone' => 'required|numeric|min:10',
+            'email' => 'required|email',
+            'pic' => 'required|mimes:jpeg,bmp,png,png',
+            'description' => 'required|min:20'
+        ]);
+        if ($request->hasFile('pic')) {
+            $filename = time() . '.' . $request->pic->getClientOriginalExtension();
+            $request->pic->move('/complainpics', $filename);
+        }
+        $complain = new Complain;
+        $complain->name = $request->name;
+        $complain->phone = $request->phone;
+        $complain->email = $request->email;
+        $complain->pic = $filename;
+        $complain->description = $request->description;
+        $complain->save();
+        return redirect('/')->with('success', 'complain launched successful');
     }
 }
