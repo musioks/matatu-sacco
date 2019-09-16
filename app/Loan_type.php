@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Guarantor_request extends Model
+class Loan_type extends Model
 {
     //
+    protected $guarded = [];
 }

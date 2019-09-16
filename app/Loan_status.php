@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Member extends Model
+class Loan_status extends Model
 {
+    //
     protected $guarded = [];
 }
