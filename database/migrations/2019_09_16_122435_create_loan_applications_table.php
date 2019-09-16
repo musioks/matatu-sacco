@@ -19,7 +19,6 @@ class CreateLoanApplicationsTable extends Migration
             $table->unsignedBigInteger('loan_type_id');
             $table->float('principal_amount',15,2);
             $table->unsignedInteger('interest_period');
-            $table->float('interest_rate',8,2);
             $table->float('interest_amount',8,2);
             $table->unsignedBigInteger('guarantor_id');
             $table->boolean('guarantor_accepted')->default(0);
