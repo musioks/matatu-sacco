@@ -23,13 +23,17 @@ Route::post('/admin','PagesController@adminSignup')->name('adminSignup');
 
 //------------------Admin Routes ---------------------------------------------
 Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
-Route::get('/admin/members','AdminController@members')->name('members');
-Route::get('/admin/users','AdminController@users')->name('users');
-Route::get('/admin/loan','AdminController@approveLoan')->name('admin_loan');
-Route::get('/admin/shares','AdminController@shares')->name('shares');
-Route::get('/admin/insurance','AdminController@insurance')->name('insurances');
-Route::get('/admin/complains','AdminController@complains')->name('admin_complains');
-Route::get('/admin/bookings','AdminController@bookings')->name('bookings');
+Route::get('/admin/members','AdminController@members');
+Route::get('/admin/users','AdminController@users');
+Route::get('/admin/loans','AdminController@getLoans');
+Route::get('/admin/loan-applications','AdminController@loanApplications');
+// Approve and Reject Loans.
+Route::get('/admin/loan-application/{application_id}/approve','LoanApprovalController@approve');
+Route::get('/admin/loan-application/{application_id}/reject','LoanApprovalController@reject');
+Route::get('/admin/shares','AdminController@shares');
+Route::get('/admin/insurance','AdminController@insurance');
+Route::get('/admin/complains','AdminController@complains');
+Route::get('/admin/bookings','AdminController@bookings');
 Route::post('/postLoan/{id}','AdminController@postLoan')->name('postLoan');
 Route::post('/postshare','AdminController@postshare')->name('postshare');
 Route::post('/postInsurance','AdminController@postInsurance')->name('postInsurance');

@@ -16,6 +16,16 @@ class AdminController extends Controller
         $this->middleware('admin');
     }
 
+    public function loanApplications()
+    {
+        return view('admin.loan_applications');
+    }
+
+    public function getLoans()
+    {
+        return view('admin.loans');
+    }
+
     public function dashboard()
     {
         $users = DB::table('users')->get();
