@@ -14,7 +14,7 @@
   <body class="sidebar-mini fixed">
     <div class="wrapper">
       <!-- Navbar-->
-      <header class="main-header hidden-print"><a class="logo" href="index.html">Online Matatu</a>
+      <header class="main-header hidden-print"><a class="logo" href="#">Online Matatu</a>
         <nav class="navbar navbar-static-top">
           <!-- Sidebar toggle button--><a class="sidebar-toggle" href="#" data-toggle="offcanvas"></a>
           <!-- Navbar Right Menu-->
@@ -23,7 +23,7 @@
               <li><a href="{{route('member.index')}}" style="background-color:transparent;color:#FFF;font-size:20px; font-weight:13px;"><strong>	ONLINE MATATU SACCO SYSTEM</strong></a></li>
             </ul>
             <ul class="top-nav">
-           
+
               <!-- User Menu-->
               <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-lg fa-fw "></i>{{Sentinel::getUser()->name}}</a>
                 <ul class="dropdown-menu settings-menu">
@@ -44,23 +44,18 @@
       <!-- Side-Nav-->
       <aside class="main-sidebar hidden-print">
         <section class="sidebar">
-         
+
           <!-- Sidebar Menu-->
           <ul class="sidebar-menu">
             <li class="active">
-              <a href="{{route('member.index')}}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+              <a href="{{url('/member')}}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
             </li>
-            <li class="treeview"><a href="#"><i class="fa fa-imdb"></i><span>Check Balances</span><i class="fa fa-angle-right"></i></a>
-                      <ul class="treeview-menu">
-                        <li><a href="{{ route('loan_balance',Sentinel::getUser()->id)}}"><i class="fa fa-circle-o"></i> Loan</a></li>
-                        <li><a href="{{ route('share_balance',Sentinel::getUser()->id)}}"><i class="fa fa-circle-o"></i> Share Capital</a></li>
-                        <li><a href="{{ route('insurance_balance',Sentinel::getUser()->id)}}"><i class="fa fa-circle-o"></i> Insurance </a></li>
-                      </ul>
-                    </li> 
-            <li><a href="{{ route('loan_apply') }}"><i  class="fa fa-money"></i><span>Apply Loan</span></a>
-            </li> 
-             <li><a href="{{route('loan_status',Sentinel::getUser()->id)}}"><i  class="fa fa-money"></i><span>Loan Status</span></a>
-            </li> 
+            <li><a href="{{url('/member/loan-applications')}}"><i  class="fa fa-pencil-square-o"></i><span>My Loan Applications</span></a>
+            </li>
+              <li><a href="{{url('/member/guarantor-requests')}}"><i  class="fa fa-hand-grab-o"></i><span>My Guarantor requests</span></a>
+              </li>
+              <li><a href="{{url('/member/loans')}}"><i  class="fa fa-money"></i><span>My Loans</span></a>
+            </li>
 
           </ul>
         </section>
@@ -89,6 +84,6 @@
       });
        $('#demoSelect').select2();
   </script>
-
+@yield('scripts')
   </body>
 </html>

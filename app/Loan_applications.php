@@ -19,7 +19,7 @@ class Loan_applications extends Model
         return $this->belongsTo(Member::class, 'member_id');
     }
 
-    public function guarantor_id()
+    public function guarantor()
     {
         return $this->belongsTo(Member::class, 'guarantor_id');
     }

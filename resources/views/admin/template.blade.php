@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -23,7 +22,7 @@
               <li><a href="{{route('dashboard')}}" style="background-color:transparent;color:#FFF;font-size:20px; font-weight:13px;"><strong>	ONLINE MATATU SACCO SYSTEM</strong></a></li>
             </ul>
             <ul class="top-nav">
-           
+
               <!-- User Menu-->
               <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-lg fa-fw "></i>{{Sentinel::getUser()->name}}</a>
                 <ul class="dropdown-menu settings-menu">
@@ -32,7 +31,7 @@
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();" ><i class="fa fa-power-off fa-lg"></i> Logout</a>
           <form id="logout-form" action="{{ url('/signout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
+                                        @csrf
                              </form>
                                                  </li>
                 </ul>
@@ -44,7 +43,7 @@
       <!-- Side-Nav-->
       <aside class="main-sidebar hidden-print">
         <section class="sidebar">
-         
+
           <!-- Sidebar Menu-->
           <ul class="sidebar-menu">
             <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
@@ -55,8 +54,8 @@
             <li><a href="{{route('insurances')}}"><i class="fa fa-shield"></i><span>Check Insurance </span></a></li>
             <li><a href="{{route('admin_complains')}}"><i class="fa fa-shield"></i><span>Check Complains </span></a></li>
             <li><a href="{{route('bookings')}}"><i class="fa fa-shield"></i><span>Check Bookings </span></a></li>
-                
-           
+
+
           </ul>
         </section>
       </aside>
@@ -87,7 +86,7 @@
        $('#demoSelect').select2();
        $('#sampleTable').DataTable();
   </script>
- 
+
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">

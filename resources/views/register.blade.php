@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,18 +24,18 @@
                     <h3 class="card-title text-success text-center">Sign up to be a Member.</h3>
                     <hr>
                     <div class="card-body">
-                        @if(Session::has('error'))
+                        @if(session()->has('error'))
                             <div class="alert alert-danger text-center">
-                                <strong>{{Session::get('danger')}}</strong>
+                                <strong>{{session()->get('danger')}}</strong>
                             </div>
                         @endif
-                        @if(Session::has('success'))
+                        @if(session()->has('success'))
                             <div class="alert alert-success text-center">
-                                <strong>{{Session::get('success')}}</strong>
+                                <strong>{{session()->get('success')}}</strong>
                             </div>
                         @endif
                         <form role="form" method="POST" action="{{url('/register')}}">
-                            {{ csrf_field() }}
+                            @csrf
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group {{ $errors->has('fname') ? ' has-error' : '' }}">
@@ -200,7 +198,7 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2">
-                                <a class="btn btn-warning icon-btn btn-block" href="{{route('index')}}"><i
+                                <a class="btn btn-warning icon-btn btn-block" href="{{url('/')}}"><i
                                         class="fa fa-fw fa-lg fa-arrow-left"></i>Back Home</a>
                             </div>
                         </div>

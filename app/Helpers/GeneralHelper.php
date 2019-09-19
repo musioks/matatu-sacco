@@ -1,45 +1,69 @@
 <?php
 
-
 namespace App\Helpers;
 
-
-use App\HR\Employee;
+use App\Loan;
+use App\Loan_applications;
+use App\Member;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\DB;
-use App\HR\Reporting_manager;
 
 class GeneralHelper
 {
-    public static function GetHandover($handover_id)
+    // get logged in member
+    public static function member()
     {
-        $employee = Employee::where('id', $handover_id)->first();
-        return $employee;
+        $user = Sentinel::getUser();
+        $member = DB::table('members')->where('email', '=', $user->email)->first();
+        return $member;
 
     }
 
-    //Maternity Leave
-    public static function Maternity()
+    // Guarantors
+    public static function guarantors()
     {
-        $maternity = DB::table('leave_types')->where('name', 'like', '%maternity%')->first();
-        return $maternity;
-    }
-    //Annual Leave
-    public static function Annual()
-    {
-        $annual = DB::table('leave_types')->where('name', 'like', '%annual%')->first();
-        return $annual;
+        $user = Sentinel::getUser();
+        $member = DB::table('members')->where('email', '=', $user->email)->first();
+        $guarantors = Member::where('id', '<>', $member->id)->get();
+        return $guarantors;
     }
 
-    //Maternity Leave
-    public static function Paternity()
+    // Get all members
+    public static function members()
     {
-        $paternity = DB::table('leave_types')->where('name', 'like', '%paternity%')->first();
-        return $paternity;
+        $members = DB::table('members')->latest()->get();
+        return $members;
+
     }
-    public static function Reporting_manager($reporting_manager_id)
+
+    public static function my_guarantor_requests()
     {
-        $reporting_manager = Reporting_manager::where('id', $reporting_manager_id)->first();
-        return $reporting_manager;
+        $user = Sentinel::getUser();
+        $member = DB::table('members')->where('email', '=', $user->email)->first();
+        $guarantor_requests = Loan_applications::where('guarantor_id', $member->id)->get();
+        return $guarantor_requests;
+    }
+
+    // My loan applications
+
+    public static function my_loan_applications()
+    {
+        $user = Sentinel::getUser();
+        $member = DB::table('members')->where('email', '=', $user->email)->first();
+        $loan_applications = Loan_applications::where('member_id', $member->id)->get();
+        return $loan_applications;
+    }
+
+    // My loan applications
+    public static function my_loans()
+    {
+        $user = Sentinel::getUser();
+        $member = DB::table('members')->where('email', '=', $user->email)->first();
+        $loan_applications = Loan_applications::where('member_id', $member->id)
+            ->where('loan_status_id', LoanStatus::approved()->id)
+            ->get()->pluck('id');
+        $loans = Loan::whereIn('loan_application_id', $loan_applications)->get();
+        return $loans;
 
     }
 }

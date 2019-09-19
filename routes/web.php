@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/','PagesController@index')->name('index');
+//Route::get('/','PagesController@index')->name('index');
 Route::get('/hire','PagesController@hire')->name('hire');
-Route::get('/login','PagesController@login')->name('login');
+Route::get('/','PagesController@login')->name('login');
 Route::post('/login','PagesController@signin')->name('signin');
 Route::post('/signout','PagesController@getLogout')->name('sign-out');
 Route::get('/register','PagesController@register')->name('register');
@@ -40,7 +40,17 @@ Route::get('/delete/insurances/{id}','AdminController@deleteInsurance');
 //------------------End Admin Routes ---------------------------------------------
 
 //------------------Member Routes ---------------------------------------------
-Route::get('/member','MemberController@member_dash')->name('member.index');
+Route::prefix('member')->group(function(){
+    Route::get('/','MemberController@member_dash')->name('member.index');
+    Route::get('/loans','MemberController@loans');
+    Route::get('/loan-applications','MemberController@loanApplications');
+    Route::get('/guarantor-requests','MemberController@guarantorRequests');
+    Route::get('/apply','MemberController@apply');
+    Route::get('/apply/get/{loan_type_id}','MemberController@leave_type');
+    Route::post('/apply','MemberController@storeApplication');
+    Route::get('/loan-application/{application_id}/approve','MemberController@acceptRequest');
+});
+
 //------------------End Member Routes ---------------------------------------------
 
 //=========================Money loan routes======================================

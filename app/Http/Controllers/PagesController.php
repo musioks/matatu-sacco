@@ -101,7 +101,7 @@ class PagesController extends Controller
             $member->relationship = $request->relationship;
             $member->save();
         });
-        return redirect('/login')->with('success', 'Member Account Created Successfully!.');
+        return redirect('/')->with('success', 'Member Account Created Successfully!.');
 
     }
 
@@ -120,7 +120,7 @@ class PagesController extends Controller
         $user = Sentinel::registerAndActivate($request->all());
         $role = Sentinel::findRoleBySlug('admin');
         $role->users()->attach($user);
-        return redirect('/login')->with('success', 'Registration successful!');
+        return redirect('/')->with('success', 'Registration successful!');
     }
 
     public function hire()
