@@ -13,12 +13,13 @@
                                 <th>#</th>
 {{--                                <th>Member Name</th>--}}
                                 <th>Loan Type</th>
-                                <th>Principal Amount</th>
+                                <th>Principal Amount (KES)</th>
                                 <th>Interest</th>
                                 <th>Interest Period</th>
-                                <th>Guarantor</th>
-                                <th>Guarantor Approval</th>
-                                <th>Status</th>
+                                <th class="text-success">Monthly Installment(KES)</th>
+                                <th>Last Paid Amount(KES)</th>
+                                <th>Last Payment Date</th>
+                                <th>Next Payment Date</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -26,25 +27,15 @@
                                 <tr>
                                     <td>{{$loop->iteration ?? ''}}</td>
 {{--                                    <td>{{$r->member->fname ?? ''}} {{$r->member->lname ?? ''}}</td>--}}
-                                    <td>{{$r->loan_type->name ?? ''}}</td>
-                                    <td>{{number_format($r->principal_amount) ?? ''}}</td>
-                                    <td>{{($r->loan_type->interest)*100 ?? ''}}</td>
-                                    <td>{{$r->interest_period ?? ''}}</td>
-                                    <td>{{$r->guarantor->fname ?? ''}} {{$r->guarantor->lname ?? ''}}</td>
-                                    <td>
-                                        @if($r->guarantor_accepted===0)
-                                            <button class="btn btn-danger btn-sm">
-                                                Not Accepted</button>
-                                        @else
-                                            <button class="btn btn-success btn-sm">
-                                                Accepted</button>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-info btn-sm">
-                                            Loan {{$r->loan_status->name ?? ''}}</button>
+                                    <td>{{$r->loan_application->loan_type->name ?? ''}}</td>
+                                    <td>{{number_format($r->loan_application->principal_amount) ?? ''}}</td>
+                                    <td>{{($r->loan_application->loan_type->interest_rate)*100 ?? ''}}</td>
+                                    <td>{{$r->loan_application->interest_period ?? ''}}</td>
+                                    <td>{{$r->loan_application->monthly_installment ?? ''}}</td>
+                                    <td>{{$r->amount_paid ?? ''}}</td>
+                                    <td>{{$r->repayment_date ?? ''}}</td>
+                                    <td>{{$r->next_repayment_date ?? ''}}</td>
 
-                                    </td>
                                 </tr>
                             @empty
                                 {{""}}

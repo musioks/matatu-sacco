@@ -19,7 +19,11 @@ class LeaveHelper
 // pending applications
     public static function pending_applications()
     {
-        $applications = Loan_applications::where('loan_status_id', LoanStatus::pending()->id)->latest()->get();
+        $statuses = collect([
+            LoanStatus::pending()->id,
+            LoanStatus::initiated()->id
+        ]);
+        $applications = Loan_applications::whereIn('loan_status_id', $statuses)->latest()->get();
         return $applications;
     }
 

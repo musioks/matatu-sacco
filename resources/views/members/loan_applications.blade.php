@@ -59,7 +59,7 @@
                                 </td>
                                 <td>
                                     <button class="btn btn-info btn-sm">
-                                        Loan {{$r->loan_status->name ?? ''}}</button>
+                                    {{$r->loan_status->name ?? ''}}</button>
 
                                 </td>
                             </tr>
