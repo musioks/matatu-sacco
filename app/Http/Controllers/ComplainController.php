@@ -26,7 +26,7 @@ class ComplainController extends Controller
         ]);
         if ($request->hasFile('pic')) {
             $filename = time() . '.' . $request->pic->getClientOriginalExtension();
-            $request->pic->move('/complainpics', $filename);
+            $request->pic->move('complain_files', $filename);
         }
         $complain = new Complain;
         $complain->name = $request->name;
