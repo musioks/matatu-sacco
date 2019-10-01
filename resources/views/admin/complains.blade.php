@@ -29,7 +29,7 @@
                       <td>{{$complain->pic}}</td>
                       <td>{{$complain->description}}</td>
                       <td>{{date('F d, Y', strtotime($complain->created_at))}}</td>
-                      <td><a href="{{ url('/delete/complain',$complain->id) }}" class="btn btn-sm btn-info" title="">delete</a></td>
+                      <td><a href="{{ url('/delete/complain',$complain->id) }}" class="btn btn-sm btn-danger" title="">delete</a></td>
                     </tr>
 
                    @endforeach
