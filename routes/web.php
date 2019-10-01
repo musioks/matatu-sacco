@@ -26,6 +26,8 @@ Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
 Route::get('/admin/members','AdminController@members');
 Route::get('/admin/users','AdminController@users');
 Route::get('/admin/loans','AdminController@getLoans');
+// Print Loans
+Route::get('/admin/loans/print','AdminController@printLoans');
 Route::get('/admin/loan-applications','AdminController@loanApplications');
 // Approve and Reject Loans.
 Route::get('/admin/loan-application/{application_id}/approve','LoanApprovalController@approve');
@@ -33,6 +35,8 @@ Route::get('/admin/loan-application/{application_id}/reject','LoanApprovalContro
 Route::get('/admin/shares','AdminController@shares');
 Route::get('/admin/insurance','AdminController@insurance');
 Route::get('/admin/complains','AdminController@complains');
+// Print Complains
+Route::get('/admin/complains/print','AdminController@printComplains');
 Route::get('/admin/bookings','AdminController@bookings');
 Route::post('/postLoan/{id}','AdminController@postLoan')->name('postLoan');
 Route::post('/postshare','AdminController@postshare')->name('postshare');

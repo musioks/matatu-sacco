@@ -3,6 +3,8 @@
 @section('content')
    <div class="row">
           <div class="col-md-12">
+          <a href="{{url('/admin/complains/print')}}" class="btn btn-primary pull-right"><i class="fa fa-fw fa-file-pdf-o"></i>Print</a>
+                    <h4 class="clearfix">&nbsp;</h4>
             <div class="card">
               <div class="card-body">
                 <table class="table table-hover table-bordered" >

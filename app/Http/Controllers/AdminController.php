@@ -6,6 +6,7 @@ use App\Booking;
 use App\Complain;
 use App\Insurance;
 use App\Share;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,14 @@ class AdminController extends Controller
     public function getLoans()
     {
         return view('admin.loans');
+    }
+    // print Loans
+    public function printLoans()
+    {
+        $pdf = PDF::loadView('admin.reports.loans')
+            ->setPaper('a4', 'landscape');
+        return $pdf->stream('loans.pdf');
+
     }
 
     public function dashboard()
@@ -76,7 +85,15 @@ class AdminController extends Controller
         $complains = DB::table('complains')->get();
         return view('admin.complains', ['complains' => $complains]);
     }
+// print complains
+    public function printComplains()
+    {
+        $complains = DB::table('complains')->get();
+        $pdf = PDF::loadView('admin.reports.complains', compact('complains'))
+            ->setPaper('a4', 'landscape');
+        return $pdf->stream('all-complains.pdf');
 
+    }
     public function postLoan(Request $request, $id)
     {
         if ($request->status == "YES") {
