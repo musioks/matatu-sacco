@@ -124,11 +124,26 @@
                                 <td>{{number_format($row->booking_amount) ?? ''}}</td>
                                 <td>{!!  $row->description ?? ''!!}</td>
                                 <td>
-                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete-Bus"><i
+                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete-Bus-{{$row->id}}"><i
                                             class="fa fa-times"></i>
                                     </button>
                                     <a href="{{url('/admin/buses/'.$row->id.'/view')}}" class="btn btn-sm btn-success" >View</a>
                                 </td>
+                                <!-- ====================Delete Modal===========================  -->
+                                <div id="delete-Bus-{{ $row->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <h5>Are you sure you want to delete this vehicle?</h5>
+                                            </div>
+                                            <div class="modal-footer clearfix">
+                                                <a href="{{ url('/admin/buses/'.$row->id.'/delete') }}" class="btn btn-success pull-left">Okay</a>
+                                                <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+                                <!-- ====================End Delete Modal===========================  -->
                             </tr>
 
                         @endforeach

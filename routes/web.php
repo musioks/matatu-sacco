@@ -19,7 +19,7 @@ Route::post('/signout','PagesController@getLogout')->name('sign-out');
 Route::get('/register','PagesController@register')->name('register');
 Route::post('/register','PagesController@create')->name('create');
 //Route::get('/admin','PagesController@signup')->name('signup');
-Route::post('/admin','AdminController@adminSignup')->name('adminSignup');
+Route::post('/admin/register','AdminController@adminSignup')->name('adminSignup');
 
 //------------------Admin Routes ---------------------------------------------
 Route::get('/dashboard','AdminController@dashboard')->name('dashboard');

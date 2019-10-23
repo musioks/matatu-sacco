@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bus;
 use App\Member;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
@@ -19,7 +20,9 @@ class PagesController extends Controller
 
     public function login()
     {
-        return view('login');
+        $buses = Bus::paginate(4);
+       // dd($buses);
+        return view('login',compact('buses'));
     }
 
     public function signin(Request $request)

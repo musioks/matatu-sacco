@@ -22,7 +22,7 @@
                                     <h4 class="modal-title" id="myModalLabel">Add Admin </h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form role="form" method="POST" action="{{url('/admin')}}">
+                                    <form role="form" method="POST" action="{{url('/admin/register')}}">
                                         @csrf
                                         <div class="row">
                                             <div class="col-sm-6">
@@ -80,7 +80,7 @@
                                             <div class="row">
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <button class="btn btn-success icon-btn btn-block" type="submit"><i
-                                                            class="fa fa-fw fa-lg fa-check-circle"></i>Create Account
+                                                            class="fa fa-fw fa-lg fa-check-circle"></i>Submit
                                                     </button>
                                                 </div>
                                             </div>
