@@ -123,6 +123,12 @@
                                 <td>{{$row->capacity ?? ''}}</td>
                                 <td>{{number_format($row->booking_amount) ?? ''}}</td>
                                 <td>{!!  $row->description ?? ''!!}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete-Bus"><i
+                                            class="fa fa-times"></i>
+                                    </button>
+                                    <a href="{{url('/admin/buses/'.$row->id.'/view')}}" class="btn btn-sm btn-success" >View</a>
+                                </td>
                             </tr>
 
                         @endforeach

@@ -30,6 +30,7 @@ Route::get('/admin/loans','AdminController@getLoans');
 Route::get('/admin/buses','BusController@index');
 Route::post('/admin/buses','BusController@store');
 Route::get('/admin/buses/{bus}/view','BusController@show');
+Route::post('/admin/buses/{bus}/update','BusController@update');
 Route::get('/admin/buses/{bus}/delete','BusController@destroy');
  // End Buses management
 // Print Loans

@@ -85,6 +85,7 @@
 <script src="{{asset('js/jquery-2.1.4.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
+@include('sweetalert::alert')
 <script src="{{asset('js/plugins/bootstrap-datepicker.min.js')}}"></script>
 <script src="{{asset('js/plugins/select2.min.js')}}"></script>
 <script src="{{asset('js/plugins/bootstrap-datepicker.min.js')}}"></script>
