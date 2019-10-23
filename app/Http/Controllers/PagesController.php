@@ -110,18 +110,7 @@ class PagesController extends Controller
         return view('admin.signup');
     }
 
-    public function adminSignup(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|unique:users',
-            'password' => 'required|confirmed',
-        ]);
-        $user = Sentinel::registerAndActivate($request->all());
-        $role = Sentinel::findRoleBySlug('admin');
-        $role->users()->attach($user);
-        return redirect('/')->with('success', 'Registration successful!');
-    }
+
 
     public function hire()
     {

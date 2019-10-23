@@ -18,14 +18,20 @@ Route::post('/login','PagesController@signin')->name('signin');
 Route::post('/signout','PagesController@getLogout')->name('sign-out');
 Route::get('/register','PagesController@register')->name('register');
 Route::post('/register','PagesController@create')->name('create');
-Route::get('/admin','PagesController@signup')->name('signup');
-Route::post('/admin','PagesController@adminSignup')->name('adminSignup');
+//Route::get('/admin','PagesController@signup')->name('signup');
+Route::post('/admin','AdminController@adminSignup')->name('adminSignup');
 
 //------------------Admin Routes ---------------------------------------------
 Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
 Route::get('/admin/members','AdminController@members');
 Route::get('/admin/users','AdminController@users');
 Route::get('/admin/loans','AdminController@getLoans');
+// Manage Buses
+Route::get('/admin/buses','BusController@index');
+Route::post('/admin/buses','BusController@store');
+Route::get('/admin/buses/{bus}/view','BusController@show');
+Route::get('/admin/buses/{bus}/delete','BusController@destroy');
+ // End Buses management
 // Print Loans
 Route::get('/admin/loans/print','AdminController@printLoans');
 Route::get('/admin/loan-applications','AdminController@loanApplications');

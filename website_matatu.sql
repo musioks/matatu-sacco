@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 30, 2019 at 06:43 PM
+-- Generation Time: Oct 01, 2019 at 08:19 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -43,9 +43,8 @@ CREATE TABLE `activations` (
 --
 
 INSERT INTO `activations` (`id`, `user_id`, `code`, `completed`, `completed_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'zFPGFxpOS5Au2X6KQ5HGQJZkom74pZHA', 1, '2019-09-18 14:37:06', '2019-09-18 14:37:06', '2019-09-18 14:37:06'),
-(2, 2, 'bDbJjtpGlaoU3VYsHQl2N9MqjJkT7HSH', 1, '2019-09-18 16:52:45', '2019-09-18 16:52:45', '2019-09-18 16:52:45'),
-(3, 3, '8uvXEfkRkLrrqKhtifHsSflW0QR1FJe0', 1, '2019-09-18 21:35:03', '2019-09-18 21:35:03', '2019-09-18 21:35:03');
+(1, 1, 'cSMThyDR0WeTjnaoA99WzdWe72q81Yqu', 1, '2019-10-01 04:13:06', '2019-10-01 04:13:05', '2019-10-01 04:13:06'),
+(2, 2, 'y8aA59UI4KPg2d8lfpacGfN8fYB1LpCp', 1, '2019-10-01 04:52:22', '2019-10-01 04:52:22', '2019-10-01 04:52:22');
 
 -- --------------------------------------------------------
 
@@ -81,6 +80,14 @@ CREATE TABLE `complains` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `complains`
+--
+
+INSERT INTO `complains` (`id`, `name`, `email`, `phone`, `pic`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'Joshua Ngumbau', 'admin@kinetic.io', '0720692415', '1569913512.jpg', 'ggdhddddddddddddddddddddddddddddddddsggshhdhjdjjd\r\nghdhdjjdjd', '2019-10-01 04:05:12', '2019-10-01 04:05:12'),
+(2, 'alanameza', 'admin@kinetic.io', '0720692415', '1569913763.jpg', 'ghdhhd\r\nsghdhhdjjfjhhf\r\ndhhdjjdjdjd \r\ndhhdj', '2019-10-01 04:09:23', '2019-10-01 04:09:23');
+
 -- --------------------------------------------------------
 
 --
@@ -113,13 +120,6 @@ CREATE TABLE `loans` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `loans`
---
-
-INSERT INTO `loans` (`id`, `loan_application_id`, `amount_paid`, `repayment_date`, `next_repayment_date`, `loan_status_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 0.00, '2019-09-19', '2019-10-19', 2, '2019-09-18 22:49:13', '2019-09-18 22:49:13');
-
 -- --------------------------------------------------------
 
 --
@@ -143,16 +143,6 @@ CREATE TABLE `loan_applications` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `loan_applications`
---
-
-INSERT INTO `loan_applications` (`id`, `member_id`, `loan_type_id`, `principal_amount`, `interest_period`, `monthly_installment`, `interest_amount`, `no_of_repayments`, `guarantor_id`, `guarantor_accepted`, `loan_status_id`, `date_approved`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 60000.00, 5, 1300.00, 18000.00, 60, 1, 1, 2, '2019-09-19', '2019-09-18 20:45:01', '2019-09-18 22:49:12'),
-(2, 2, 2, 80000.00, 5, 1866.67, 32000.00, 60, 1, 0, 4, NULL, '2019-09-18 21:08:01', '2019-09-18 22:50:25'),
-(3, 2, 3, 40000.00, 2, 1833.33, 4000.00, 24, 1, 0, 1, NULL, '2019-09-18 21:33:01', '2019-09-18 21:33:01'),
-(4, 2, 1, 75000.00, 7, 1267.86, 31500.00, 84, 1, 0, 4, NULL, '2019-09-18 21:33:43', '2019-09-18 22:44:24');
-
 -- --------------------------------------------------------
 
 --
@@ -171,10 +161,10 @@ CREATE TABLE `loan_statuses` (
 --
 
 INSERT INTO `loan_statuses` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Initiated', '2019-09-16 17:04:04', '2019-09-16 17:04:04'),
-(2, 'Approved', '2019-09-16 17:04:04', '2019-09-16 17:04:04'),
-(3, 'Pending', '2019-09-16 17:04:04', '2019-09-16 17:04:04'),
-(4, 'Rejected', '2019-09-16 17:04:04', '2019-09-16 17:04:04');
+(1, 'Initiated', '2019-10-01 03:52:54', '2019-10-01 03:52:54'),
+(2, 'Approved', '2019-10-01 03:52:54', '2019-10-01 03:52:54'),
+(3, 'Pending', '2019-10-01 03:52:54', '2019-10-01 03:52:54'),
+(4, 'Rejected', '2019-10-01 03:52:54', '2019-10-01 03:52:54');
 
 -- --------------------------------------------------------
 
@@ -195,10 +185,10 @@ CREATE TABLE `loan_types` (
 --
 
 INSERT INTO `loan_types` (`id`, `name`, `interest_rate`, `created_at`, `updated_at`) VALUES
-(1, 'Asset Financing', 0.06, '2019-09-16 17:04:04', '2019-09-16 17:04:04'),
-(2, 'Personal Loan', 0.08, '2019-09-16 17:04:04', '2019-09-16 17:04:04'),
-(3, 'Business Loan', 0.05, '2019-09-16 17:04:04', '2019-09-16 17:04:04'),
-(4, 'Mwalimu Loan', 0.04, '2019-09-16 17:04:04', '2019-09-16 17:04:04');
+(1, 'Asset Financing', 0.06, '2019-10-01 03:52:53', '2019-10-01 03:52:53'),
+(2, 'Personal Loan', 0.08, '2019-10-01 03:52:53', '2019-10-01 03:52:53'),
+(3, 'Business Loan', 0.05, '2019-10-01 03:52:53', '2019-10-01 03:52:53'),
+(4, 'Mwalimu Loan', 0.04, '2019-10-01 03:52:53', '2019-10-01 03:52:53');
 
 -- --------------------------------------------------------
 
@@ -213,7 +203,7 @@ CREATE TABLE `members` (
   `lname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `residence` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `relationship` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dob` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dob` date DEFAULT NULL,
   `nok` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -227,8 +217,7 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`id`, `user_id`, `fname`, `lname`, `residence`, `relationship`, `dob`, `nok`, `nid`, `phone`, `email`, `created_at`, `updated_at`) VALUES
-(1, 1, 'daniel', 'katumbi', 'MWINGI', 'Wife', '14/07/1988', 'munyu mwingi', '23457977', '254713919646', 'dan@gmail.com', '2019-09-18 14:37:07', '2019-09-18 14:37:07'),
-(2, 2, 'kimanzi', 'paul', 'MWINGI', 'Father', '20/06/2000', 'munyu kiasi', '20002000', '254711647520', 'kimanzi@gmail.com', '2019-09-18 16:52:46', '2019-09-18 16:52:46');
+(1, 1, 'Haroun', 'Thambo', 'MWINGI', 'Son', '1994-06-14', 'munyu mwingi', '23457977', '254713919646', 'joshua@gmail.com', '2019-10-01 04:13:06', '2019-10-01 04:13:06');
 
 -- --------------------------------------------------------
 
@@ -259,8 +248,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (10, '2019_09_16_105303_create_loan_types_table', 1),
 (11, '2019_09_16_122435_create_loan_applications_table', 1),
 (12, '2019_09_16_123118_create_loans_table', 1),
-(13, '2019_09_18_232542_update_loan_applications_table', 2),
-(14, '2019_09_18_234301_modify_loan_applications_table', 3);
+(13, '2019_09_18_232542_update_loan_applications_table', 1),
+(14, '2019_09_18_234301_modify_loan_applications_table', 1),
+(15, '2019_10_01_065030_update_members_table', 1);
 
 -- --------------------------------------------------------
 
@@ -287,6 +277,13 @@ CREATE TABLE `persistences` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `persistences`
+--
+
+INSERT INTO `persistences` (`id`, `user_id`, `code`, `created_at`, `updated_at`) VALUES
+(1, 2, 'ZQYicHgQuI4ezScuq52nNlcfIP46EeuK', '2019-10-01 04:52:30', '2019-10-01 04:52:30');
 
 -- --------------------------------------------------------
 
@@ -361,9 +358,8 @@ CREATE TABLE `role_users` (
 --
 
 INSERT INTO `role_users` (`user_id`, `role_id`, `created_at`, `updated_at`) VALUES
-(1, 2, '2019-09-18 14:37:07', '2019-09-18 14:37:07'),
-(2, 2, '2019-09-18 16:52:46', '2019-09-18 16:52:46'),
-(3, 1, '2019-09-18 21:35:04', '2019-09-18 21:35:04');
+(1, 2, '2019-10-01 04:13:06', '2019-10-01 04:13:06'),
+(2, 1, '2019-10-01 04:52:22', '2019-10-01 04:52:22');
 
 -- --------------------------------------------------------
 
@@ -379,13 +375,6 @@ CREATE TABLE `shares` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `shares`
---
-
-INSERT INTO `shares` (`id`, `member_id`, `amount`, `date_added`, `created_at`, `updated_at`) VALUES
-(1, 1, 17500.00, '2019-09-19', '2019-09-18 21:35:59', '2019-09-18 21:35:59');
 
 -- --------------------------------------------------------
 
@@ -425,9 +414,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `avatar`, `email`, `password`, `permissions`, `last_login`, `created_at`, `updated_at`) VALUES
-(1, 'daniel katumbi', 'user.png', 'dan@gmail.com', '$2y$10$s0WPjRGv9qVQYwUTcZjNb.b.c8AR/idyRKn82ntx88qoO1bHxpWRu', NULL, '2019-09-18 23:33:24', '2019-09-18 14:37:06', '2019-09-18 23:33:24'),
-(2, 'kimanzi paul', 'user.png', 'kimanzi@gmail.com', '$2y$10$7Ae1ObTB2HlzYDItbNio9.MV.W5dbFtKYwJWk1KmDkaZD7f4bZ13m', NULL, '2019-09-18 23:20:11', '2019-09-18 16:52:45', '2019-09-18 23:20:11'),
-(3, 'Danson Meeza', 'user.png', 'davidmusyoka@rocketmail.com', '$2y$10$oXz0eo5/YF6B1bYKSp3UG.3MEZEWCopVq6wPnx1eSpwEq8UrCJ8/6', NULL, '2019-09-18 23:34:22', '2019-09-18 21:35:03', '2019-09-18 23:34:22');
+(1, 'Haroun Thambo', 'user.png', 'joshua@gmail.com', '$2y$10$YMS6arWan2YuHuw5I5PPoulDvR0MYidZ11Y.ix2wUYJhp6cjwQsxG', NULL, NULL, '2019-10-01 04:13:05', '2019-10-01 04:13:05'),
+(2, 'Admin User', 'user.png', 'admin@admin.com', '$2y$10$BPskw32gFE8AoxFZeWqC1.CYjlJor/gg6bgyJWo1ccTfbEvSYI6oG', NULL, '2019-10-01 04:52:30', '2019-10-01 04:52:21', '2019-10-01 04:52:30');
 
 --
 -- Indexes for dumped tables
@@ -565,7 +553,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activations`
 --
 ALTER TABLE `activations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `bookings`
@@ -577,7 +565,7 @@ ALTER TABLE `bookings`
 -- AUTO_INCREMENT for table `complains`
 --
 ALTER TABLE `complains`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `insurances`
@@ -589,13 +577,13 @@ ALTER TABLE `insurances`
 -- AUTO_INCREMENT for table `loans`
 --
 ALTER TABLE `loans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `loan_applications`
 --
 ALTER TABLE `loan_applications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `loan_statuses`
@@ -613,19 +601,19 @@ ALTER TABLE `loan_types`
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `persistences`
 --
 ALTER TABLE `persistences`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -649,7 +637,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `shares`
 --
 ALTER TABLE `shares`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `throttle`
@@ -661,7 +649,7 @@ ALTER TABLE `throttle`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

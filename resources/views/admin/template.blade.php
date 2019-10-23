@@ -9,6 +9,7 @@
 
     <link href="{{asset('css/main.css')}}" rel="stylesheet">
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
+    @yield('styles')
 </head>
 <body class="sidebar-mini fixed">
 <div class="wrapper">
@@ -59,6 +60,7 @@
                 <li><a href="{{url('admin/loan-applications')}}"><i class="fa fa-pencil-square-o"></i><span>Loans Applications</span></a>
                 </li>
                 <li><a href="{{url('admin/loans')}}"><i class="fa fa-money"></i><span>Loans</span></a></li>
+                <li><a href="{{url('admin/buses')}}"><i class="fa fa-cab"></i><span>Buses</span></a></li>
                 <li><a href="{{url('admin/shares')}}"><i class="fa fa-shopping-bag"></i><span>Shares</span></a>
                 </li>
                 <li><a href="{{url('admin/insurance')}}"><i class="fa fa-shield"></i><span>Insurance </span></a>

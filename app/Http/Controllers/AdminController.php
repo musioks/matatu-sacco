@@ -6,7 +6,9 @@ use App\Booking;
 use App\Complain;
 use App\Insurance;
 use App\Share;
+use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,6 +22,18 @@ class AdminController extends Controller
     public function loanApplications()
     {
         return view('admin.loan_applications');
+    }
+    public function adminSignup(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required|confirmed',
+        ]);
+        $user = Sentinel::registerAndActivate($request->all());
+        $role = Sentinel::findRoleBySlug('admin');
+        $role->users()->attach($user);
+        return redirect()->back()->with('success', 'Admin User created successfully!');
     }
 
     public function getLoans()
@@ -50,7 +64,8 @@ class AdminController extends Controller
 
     public function users()
     {
-        $users = DB::table('users')->get();
+        $users = User::all();
+        //dd($users);
         return view('admin.users', ['users' => $users]);
     }
 

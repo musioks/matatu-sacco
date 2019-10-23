@@ -22,7 +22,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{route('index')}}">ONLINE MATATU SACCO SYSTEM</a>
+      <a class="navbar-brand" href="{{url('/')}}">ONLINE MATATU SACCO SYSTEM</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -31,13 +31,13 @@
         <li><a href="{{url('/')}}">Adverts</a></li>
         <li class="active"><a href="{{url('/hire')}}">Hire Matatu</a></li>
         <li><a href="{{ route('complains') }}">Complains</a></li>
-    
+
       </ul>
-     
+
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{{url('/register')}}">Register</a></li>
         <li><a href="{{url('/login')}}">Login</a></li>
-      
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
