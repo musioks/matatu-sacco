@@ -22,7 +22,7 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="{{route('dashboard')}}"
-                           style="background-color:transparent;color:#FFF;font-size:20px; font-weight:13px;"><strong>
+                           style="background-color:transparent;color:#FFF;font-size:20px; font-weight:bold;"><strong>
                                 ONLINE MATATU SACCO SYSTEM</strong></a></li>
                 </ul>
                 <ul class="top-nav">
@@ -55,20 +55,21 @@
 
             <!-- Sidebar Menu-->
             <ul class="sidebar-menu">
-                <li><a href="{{url('/dashboard')}}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
-                <li><a href="{{url('/admin/members')}}"><i class="fa fa-user"></i><span>Members</span></a></li>
-                <li><a href="{{url('admin/loan-applications')}}"><i class="fa fa-pencil-square-o"></i><span>Loans Applications</span></a>
+                <li class="{{request()->is('dashboard') ? 'active':''}}"><a href="{{url('/dashboard')}}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
+                <li class="{{request()->is('admin/members') ? 'active':''}}"><a href="{{url('/admin/members')}}"><i class="fa fa-user"></i><span>Members</span></a></li>
+                <li class="{{request()->is('admin/loan-applications') ? 'active':''}}"><a href="{{url('admin/loan-applications')}}"><i class="fa fa-pencil-square-o"></i><span>Loans Applications</span></a>
                 </li>
-                <li><a href="{{url('admin/loans')}}"><i class="fa fa-money"></i><span>Loans</span></a></li>
-                <li><a href="{{url('admin/buses')}}"><i class="fa fa-cab"></i><span>Buses</span></a></li>
-                <li><a href="{{url('admin/shares')}}"><i class="fa fa-shopping-bag"></i><span>Shares</span></a>
+                <li class="{{request()->is('admin/loans') ? 'active':''}}"><a href="{{url('admin/loans')}}"><i class="fa fa-money"></i><span>Loans</span></a></li>
+                <li class="{{request()->is('admin/buses') ? 'active':''}}"><a href="{{url('admin/buses')}}"><i class="fa fa-cab"></i><span>Buses</span></a></li>
+                <li class="{{request()->is('admin/bookings') ? 'active':''}}"><a href="{{url('/admin/bookings')}}"><i class="fa fa-list"></i><span>Bus Hires </span></a></li>
+                <li class="{{request()->is('admin/shares') ? 'active':''}}"><a href="{{url('admin/shares')}}"><i class="fa fa-shopping-bag"></i><span>Shares</span></a>
                 </li>
-                <li><a href="{{url('admin/insurance')}}"><i class="fa fa-shield"></i><span>Insurance </span></a>
+                <li class="{{request()->is('admin/insurance') ? 'active':''}}"><a href="{{url('admin/insurance')}}"><i class="fa fa-shield"></i><span>Insurance </span></a>
                 </li>
-                <li><a href="{{url('admin/complains')}}"><i class="fa fa-list-alt"></i><span>Complains </span></a>
+                <li class="{{request()->is('admin/complains') ? 'active':''}}"><a href="{{url('admin/complains')}}"><i class="fa fa-list-alt"></i><span>Complains </span></a>
                 </li>
-                <li><a href="{{url('admin/users')}}"><i class="fa fa-user"></i><span>Users</span></a></li>
-                {{--            <li><a href="{{route('bookings')}}"><i class="fa fa-shield"></i><span>Check Bookings </span></a></li>--}}
+                <li class="{{request()->is('admin/users') ? 'active':''}}"><a href="{{url('admin/users')}}"><i class="fa fa-user"></i><span>Users</span></a></li>
+
             </ul>
         </section>
     </aside>
@@ -88,7 +89,6 @@
 @include('sweetalert::alert')
 <script src="{{asset('js/plugins/bootstrap-datepicker.min.js')}}"></script>
 <script src="{{asset('js/plugins/select2.min.js')}}"></script>
-<script src="{{asset('js/plugins/bootstrap-datepicker.min.js')}}"></script>
 <script src="{{asset('js/plugins/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('js/plugins/dataTables.bootstrap.min.js')}}"></script>
 <script type="text/javascript">

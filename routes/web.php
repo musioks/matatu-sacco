@@ -13,6 +13,7 @@
 
 //Route::get('/','PagesController@index')->name('index');
 Route::get('/hire','PagesController@hire')->name('hire');
+Route::post('/hire-bus','PagesController@hireBus');
 Route::get('/','PagesController@login')->name('login');
 Route::post('/login','PagesController@signin')->name('signin');
 Route::post('/signout','PagesController@getLogout')->name('sign-out');
@@ -44,7 +45,11 @@ Route::get('/admin/insurance','AdminController@insurance');
 Route::get('/admin/complains','AdminController@complains');
 // Print Complains
 Route::get('/admin/complains/print','AdminController@printComplains');
-Route::get('/admin/bookings','AdminController@bookings');
+// Bookings
+Route::get('/admin/bookings','BookingController@index');
+Route::get('/admin/bookings/{booking}/view','BookingController@show');
+Route::get('/admin/bookings/{booking}/delete','BookingController@destroy');
+// End Booking
 Route::post('/postLoan/{id}','AdminController@postLoan')->name('postLoan');
 Route::post('/postshare','AdminController@postshare')->name('postshare');
 Route::post('/postInsurance','AdminController@postInsurance')->name('postInsurance');

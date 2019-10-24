@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bus;
+use App\Bus_booking;
 use App\Member;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
@@ -13,16 +14,40 @@ use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
-    public function index()
+    public function hireBus(Request $request)
     {
-        return view('index');
+        try {
+            $data = [
+                'bus_id' => $request->bus_id,
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'purpose' => $request->purpose,
+                'from_date' => $request->from_date,
+                'to_date' => $request->to_date,
+            ];
+            $booking_exists = DB::table('bus_bookings')
+                ->where('status', 1)
+                ->where('bus_id', $data['bus_id'])
+                ->whereBetween(DB::raw('from_date AND to_date'), [$request->from_date, $request->to_date])
+                ->get();
+            if ($booking_exists->isEmpty()) {
+                Bus_booking::create($data);
+                return redirect()->back()->with('success', 'Bus has been booked successfully!');
+            } else {
+                return redirect()->back()->with('warning', 'Bus is already in hire!');
+            }
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'Bus  could not be booked, try again!');
+        }
+
     }
 
     public function login()
     {
         $buses = Bus::paginate(4);
-       // dd($buses);
-        return view('login',compact('buses'));
+        // dd($buses);
+        return view('login', compact('buses'));
     }
 
     public function signin(Request $request)
@@ -112,7 +137,6 @@ class PagesController extends Controller
     {
         return view('admin.signup');
     }
-
 
 
     public function hire()

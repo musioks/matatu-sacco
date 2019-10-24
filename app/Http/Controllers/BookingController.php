@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Booking;
+use App\Bus;
+use App\Bus_booking;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,52 +20,27 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        $bookings = Bus_booking::latest()->get();
+        return view('admin.bookings',compact('bookings'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $books=new Booking;
-        $books->name=$request->name;
-        $books->phone=$request->phone;
-        $books->email=$request->email;
-        $books->destination=$request->destination;
-        $books->event_date=$request->event_date;
-        $books->save();
-        return redirect()->back()->with('success','Booking made successfully');
-    }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Booking  $booking
-     * @return \Illuminate\Http\Response
+     * @param Bus_booking $booking
+     * @return void
      */
-    public function show(Booking $booking)
+    public function show(Bus_booking $booking)
     {
-        //
+        //dd($booking);
+        return view('admin.view-booking', compact('booking'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Booking  $booking
+     * @param Booking $booking
      * @return \Illuminate\Http\Response
      */
     public function edit(Booking $booking)
@@ -70,8 +51,8 @@ class BookingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Booking  $booking
+     * @param \Illuminate\Http\Request $request
+     * @param Booking $booking
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Booking $booking)
@@ -82,11 +63,16 @@ class BookingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Booking  $booking
-     * @return \Illuminate\Http\Response
+     * @param Bus_booking $booking
+     * @return void
      */
-    public function destroy(Booking $booking)
+    public function destroy(Bus_booking $booking)
     {
-        //
+        try {
+            $booking->delete();
+            return redirect()->back()->with('info', 'Bus hire has been removed!');
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'Bus hire could not been removed!');
+        }
     }
 }

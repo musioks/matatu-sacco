@@ -1,37 +1,40 @@
 @extends('admin.template')
-@section('page_name') <i class="fa fa-fw fa-user"></i>Bookings @stop
+@section('page_name') <i class="fa fa-fw fa-list"></i>Bus Hires @stop
 @section('content')
    <div class="row">
           <div class="col-md-12">
             <div class="card">
               <div class="card-body">
-                <table class="table table-hover table-bordered" >
+                <table class="table table-hover table-bordered">
                   <thead>
                     <tr>
+                      <th>#</th>
+                      <th>Bus</th>
                       <th>Name</th>
-                      <th>Email</th>
-                      <th>Phone</th>
-                      <th>destination</th>
-                      <th>Event Date</th>
+                      <th>From Date</th>
+                      <th>To Date</th>
+                      <th>Purpose</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @if(!empty($bookings))
                   @foreach($bookings as $booking)
                     <tr>
-                      <td>{{$booking->name}}</td>
-                      <td>{{$booking->email}}</td>
-                      <td>{{$booking->phone}}</td>
-                      <td>{{$booking->destination}}</td>
-                      <td>{{date('F d, Y', strtotime($booking->event_date))}}</td>
-                      <td><a href="{{ url('/delete/booking',$booking->id) }}" class="btn btn-sm btn-info" title="">delete</a></td>
+                      <td>{{$loop->iteration}}</td>
+                      <td>{{$booking->bus->number_plate ?? ''}}</td>
+                      <td>{{$booking->name ?? ''}}</td>
+                      <td>{{$booking->from_date ?? ''}}</td>
+                      <td>{{$booking->to_date ?? ''}}</td>
+                      <td>{{$booking->purpose ?? ''}}</td>
+                      <td>
+{{--                          <a href="{{ url('/admin/bookings/',$booking->id.'/delete') }}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i> </a>--}}
+                          <a href="{{ url('/admin/bookings/'.$booking->id.'/delete') }}" onclick="return confirm('Do you want to delete this booking?');" class="btn btn-sm btn-danger"><i class="fa fa-times"></i> </a>
+                          <a href="{{url('admin/bookings/'.$booking->id.'/view')}}" class="btn btn-sm btn-success">View</a>
+                      </td>
                     </tr>
 
-                  
                    @endforeach
-                   @endif
-               
+
                   </tbody>
                 </table>
               </div>
