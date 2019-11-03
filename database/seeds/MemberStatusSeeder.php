@@ -4,50 +4,39 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class RolesTableSeeder extends Seeder
+class MemberStatusSeeder extends Seeder
 {
-
     /**
-     * Auto generated seed file
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
+        DB::table('member_statuses')->truncate();
 
-
-        DB::table('roles')->truncate();
-
-        DB::table('roles')->insert(array(
+        DB::table('member_statuses')->insert(array(
             0 =>
                 array(
                     'id' => 1,
-                    'slug' => 'admin',
-                    'name' => 'admin',
-                    'permissions' => NULL,
+                    'name' => 'pending',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ),
             1 =>
                 array(
                     'id' => 2,
-                    'slug' => 'member',
-                    'name' => 'member',
-                    'permissions' => NULL,
+                    'name' => 'approved',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ),
             2 =>
                 array(
                     'id' => 3,
-                    'slug' => 'customer',
-                    'name' => 'customer',
-                    'permissions' => NULL,
+                    'name' => 'rejected',
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ),
         ));
-
-
     }
 }

@@ -21,7 +21,7 @@
     <section class="login-content">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-10 col-md-offset-1">
                     <div class="card">
                         <h3 class="card-title text-success text-center">Sign up to be a Member.</h3>
                         <hr>
@@ -36,10 +36,10 @@
                                 <strong>{{session()->get('success')}}</strong>
                             </div>
                             @endif
-                            <form role="form" method="POST" action="{{url('/register')}}">
+                            <form role="form" method="POST" action="{{url('/register')}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group {{ $errors->has('fname') ? ' has-error' : '' }}">
                                             <input class="form-control" placeholder="First Name" name="fname"
                                                 type="text" value="{{old('fname')}}" autofocus>
@@ -50,7 +50,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group {{ $errors->has('lname') ? ' has-error' : '' }}">
                                             <input class="form-control" placeholder="Last Name" name="lname" type="text"
                                                 value="{{old('lname')}}" autofocus>
@@ -61,21 +61,21 @@
                                             @endif
                                         </div>
                                     </div>
-                                </div>
-                                <!--end row-->
-                                <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group {{ $errors->has('nid') ? ' has-error' : '' }}">
                                             <input class="form-control" placeholder="National ID" name="nid"
-                                                type="number" value="{{old('nid')}}" autofocus>
+                                                   type="number" value="{{old('nid')}}" autofocus>
                                             @if ($errors->has('nid'))
-                                            <span class="help-block">
+                                                <span class="help-block">
                                                 <strong>{{ $errors->first('nid') }}</strong>
                                             </span>
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                </div>
+                                <!--end row-->
+                                <div class="row">
+                                    <div class="col-sm-4">
                                         <div class="form-group {{ $errors->has('dob') ? ' has-error' : '' }}">
                                             <input class="form-control" placeholder="Date of Birth" name="dob"
                                                 id="demoDate" type="text" autofocus autocomplete="off">
@@ -86,26 +86,23 @@
                                             @endif
                                         </div>
                                     </div>
-                                </div>
-                                <!--end row-->
-                                <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group {{ $errors->has('phone') ? ' has-error' : '' }}">
                                             <input class="form-control" placeholder="Phone No." name="phone" type="text"
-                                                value="{{old('phone')}}" autofocus>
+                                                   value="{{old('phone')}}" autofocus>
                                             @if ($errors->has('phone'))
-                                            <span class="help-block">
+                                                <span class="help-block">
                                                 <strong>{{ $errors->first('phone') }}</strong>
                                             </span>
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                                             <input class="form-control" placeholder="E-mail" name="email" type="email"
-                                                autofocus value="{{old('email')}}">
+                                                   autofocus value="{{old('email')}}">
                                             @if ($errors->has('email'))
-                                            <span class="help-block">
+                                                <span class="help-block">
                                                 <strong>{{ $errors->first('email') }}</strong>
                                             </span>
                                             @endif
@@ -114,7 +111,7 @@
                                 </div>
                                 <!--end row-->
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group {{ $errors->has('residence') ? ' has-error' : '' }}">
                                             <input class="form-control" placeholder="Where do you stay?"
                                                 name="residence" type="text" value="{{old('residence')}}" autofocus>
@@ -125,7 +122,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group {{ $errors->has('nok') ? ' has-error' : '' }}">
                                             <input class="form-control" placeholder="Next of Kin" name="nok" type="text"
                                                 value="{{old('nok')}}" autofocus>
@@ -136,14 +133,11 @@
                                             @endif
                                         </div>
                                     </div>
-                                </div>
-                                <!--end row-->
-                                <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group {{ $errors->has('relationship') ? ' has-error' : '' }}">
                                             <select class="form-control" value="{{old('relationship')}}"
-                                                name="relationship" id="demoSelect">
-                                                <option value=""> --How are you related to the kin above?--</option>
+                                                    name="relationship" id="demoSelect">
+                                                <option value=""> --How are you related to the kin?--</option>
                                                 <option value="Wife">Wife</option>
                                                 <option value="Husband">Husband</option>
                                                 <option value="Son">Son</option>
@@ -152,16 +146,34 @@
                                                 <option value="Mothet">Mother</option>
                                             </select>
                                             @if ($errors->has('relationship'))
-                                            <span class="help-block">
+                                                <span class="help-block">
                                                 <strong>{{ $errors->first('relationship') }}</strong>
                                             </span>
                                             @endif
                                         </div>
                                     </div>
+                                </div>
+                                <!--end row-->
+                                <div class="row">
                                     <div class="col-sm-6">
-
+                                        <div class="form-group {{ $errors->has('logbook') ? ' has-error' : '' }}">
+                                            <label for="logbook">Upload Log Book</label>
+                                            <input class="form-control" placeholder="Upload Logbook"  id="logbook" name="logbook" type="file"
+                                                   value="{{old('logbook')}}"  required autofocus>
+                                        </div>
                                     </div>
-
+                                    <div class="col-sm-6">
+                                        <div class="form-group {{ $errors->has('vehicle_image') ? ' has-error' : '' }}">
+                                            <label for="vehicle_image">Upload Vehicle Picture</label>
+                                            <input class="form-control" placeholder="Vehicle image" id="vehicle_image" name="vehicle_image" type="file"
+                                                   value="{{old('vehicle_image')}}" autofocus>
+                                            @if ($errors->has('vehicle_image'))
+                                                <span class="help-block">
+                                                <strong>{{ $errors->first('vehicle_image') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--end row-->
                                 <div class="row">
@@ -233,13 +245,13 @@
          endDate: "today",
             maxDate: today
             });
-            
+
             $('#demoDate').keyup(function () {
             if (this.value.match(/[^0-9]/g)) {
             this.value = this.value.replace(/[^0-9^-]/g, '');
             }
             });
-   
+
     $('#demoSelect').select2();
     </script>
 

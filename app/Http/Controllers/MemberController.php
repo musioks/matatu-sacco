@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Helpers\GeneralHelper;
 use App\Helpers\LoanStatus;
+use App\Insurance;
 use App\Loan_applications;
 use App\Loan_type;
+use App\Share;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -24,6 +26,25 @@ class MemberController extends Controller
     public function loans()
     {
         return view('members.loans');
+    }
+    public function shares()
+    {
+        return view('members.shares');
+    }
+    public function addShare(Request $request)
+    {
+        Share::create(array_merge($request->all()));
+        return redirect()->back()->with('success','Share added successfully!');
+    }
+    public function insurance()
+    {
+        return view('members.insurance');
+    }
+    public function addInsurance(Request $request)
+    {
+        //dd($request->all());
+        Insurance::create(array_merge($request->all()));
+        return redirect()->back()->with('success','Insurance added successfully!');
     }
 
 // Get guarantor Requests page

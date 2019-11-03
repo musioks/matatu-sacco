@@ -18,7 +18,24 @@ class GeneralHelper
         return $member;
 
     }
+    // get logged in insurance
+    public static function insurances()
+    {
+        $user = Sentinel::getUser();
+        $member = DB::table('members')->where('email', '=', $user->email)->first();
+        $insurances=Member::find($member->id)->insurances()->latest()->get();
+        return $insurances;
 
+    }
+    // get logged in share
+    public static function shares()
+    {
+        $user = Sentinel::getUser();
+        $member = DB::table('members')->where('email', '=', $user->email)->first();
+        $shares=Member::find($member->id)->shares()->latest()->get();
+        return $shares;
+
+    }
     // Guarantors
     public static function guarantors()
     {

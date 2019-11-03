@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Booking;
 use App\Complain;
+use App\Helpers\MemberStatus;
 use App\Insurance;
+use App\Member;
 use App\Share;
 use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -23,6 +25,7 @@ class AdminController extends Controller
     {
         return view('admin.loan_applications');
     }
+
     public function adminSignup(Request $request)
     {
         $this->validate($request, [
@@ -40,6 +43,7 @@ class AdminController extends Controller
     {
         return view('admin.loans');
     }
+
     // print Loans
     public function printLoans()
     {
@@ -58,8 +62,70 @@ class AdminController extends Controller
 
     public function members()
     {
-        $members = DB::table('members')->get();
-        return view('admin.members', ['members' => $members]);
+        $members = Member::all();
+        return view('admin.members', compact('members'));
+    }
+
+    public function showMember(Member $member)
+    {
+        //dd($member);
+        return view('admin.show_member',compact('member'));
+    }
+    public function updateMember(Request $request,Member $member)
+    {
+        //dd($member);
+       // dd($request->all());
+       $member->update(array_merge($request->all()));
+        $logbook_file = "";
+        $vehicle_image_file = "";
+        if ($request->hasFile('vehicle_image')) {
+            $file = $request->file('vehicle_image');
+            $vehicle_image_file = time() . '.' . $file->getClientOriginalExtension();
+            $request->vehicle_image->move('members/vehicles/', $vehicle_image_file);
+        }
+        else{
+            $vehicle_image_file=$member->vehicle_image ?? '';
+        }
+        if ($request->hasFile('logbook')) {
+            $file = $request->file('logbook');
+            $logbook_file = time() . '.' . $file->getClientOriginalExtension();
+            $request->logbook->move('members/logbooks/', $logbook_file);
+        }
+        else{
+            $logbook_file=$member->logbook ?? '';
+        }
+        $member->update([
+            'logbook'=>$logbook_file,
+            'vehicle_image'=>$vehicle_image_file,
+        ]);
+
+
+        return redirect()->back()->with('success','Member details updated!');
+    }
+    public function approveMember(Member $member)
+    {
+        //dd($member);
+        try {
+            $member->update([
+                'member_status_id' => MemberStatus::approved()->id
+            ]);
+            return redirect()->back()->with('success', 'Member account has been approved!');
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'Member account could not be approved!');
+        }
+    }
+
+    public function declineMember(Member $member)
+    {
+       // dd($member);
+        try {
+            $member->update([
+                'member_status_id' => MemberStatus::rejected()->id
+            ]);
+            return redirect()->back()->with('success', 'Member account has been declined!');
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'Member account could not be decline!');
+        }
     }
 
     public function users()
@@ -77,15 +143,15 @@ class AdminController extends Controller
 
     public function shares()
     {
-        $users = DB::table('users')->get();
-        $shares = DB::select('SELECT m.fname,m.lname,s.id as id,s.amount,s.updated_at FROM members m JOIN shares s ON m.id=s.member_id');
+        $users = Member::all();
+        $shares = Share::latest()->get();
         return view('admin.shares', ['shares' => $shares, 'users' => $users]);
     }
 
     public function insurance()
     {
-        $users = DB::table('users')->get();
-        $insurances = DB::select('SELECT m.fname,m.lname,i.id, i.date_added, i.created_at FROM members m JOIN insurances i ON m.id=i.member_id');
+        $users = Member::all();
+        $insurances = Insurance::latest()->get();
         return view('admin.insurance', ['insurances' => $insurances, 'users' => $users]);
     }
 
@@ -100,6 +166,7 @@ class AdminController extends Controller
         $complains = DB::table('complains')->get();
         return view('admin.complains', ['complains' => $complains]);
     }
+
 // print complains
     public function printComplains()
     {
@@ -109,6 +176,7 @@ class AdminController extends Controller
         return $pdf->stream('all-complains.pdf');
 
     }
+
     public function postLoan(Request $request, $id)
     {
         if ($request->status == "YES") {

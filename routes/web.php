@@ -25,6 +25,14 @@ Route::post('/admin/register','AdminController@adminSignup')->name('adminSignup'
 //------------------Admin Routes ---------------------------------------------
 Route::get('/dashboard','AdminController@dashboard')->name('dashboard');
 Route::get('/admin/members','AdminController@members');
+// Show member
+Route::get('/admin/members/{member}/show','AdminController@showMember');
+Route::post('/admin/members/{member}/update','AdminController@updateMember');
+// Approve member
+Route::get('/admin/members/{member}/approve','AdminController@approveMember');
+// Decline member
+Route::get('/admin/members/{member}/decline','AdminController@declineMember');
+
 Route::get('/admin/users','AdminController@users');
 Route::get('/admin/loans','AdminController@getLoans');
 // Manage Buses
@@ -63,6 +71,10 @@ Route::get('/delete/insurances/{id}','AdminController@deleteInsurance');
 Route::prefix('member')->group(function(){
     Route::get('/','MemberController@member_dash')->name('member.index');
     Route::get('/loans','MemberController@loans');
+    Route::get('/shares','MemberController@shares');
+    Route::post('/shares','MemberController@addShare');
+    Route::get('/insurance','MemberController@insurance');
+    Route::post('/insurance','MemberController@addInsurance');
     Route::get('/loan-applications','MemberController@loanApplications');
     Route::get('/guarantor-requests','MemberController@guarantorRequests');
     Route::get('/apply','MemberController@apply');

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Booking;
 use App\Bus;
 use App\Bus_booking;
 use Illuminate\Http\Request;
@@ -40,10 +39,10 @@ class BookingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Booking $booking
-     * @return \Illuminate\Http\Response
+     * @param Bus_booking $booking
+     * @return void
      */
-    public function edit(Booking $booking)
+    public function edit(Bus_booking $booking)
     {
         //
     }
@@ -52,10 +51,10 @@ class BookingController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param Booking $booking
-     * @return \Illuminate\Http\Response
+     * @param Bus_booking $booking
+     * @return void
      */
-    public function update(Request $request, Booking $booking)
+    public function update(Request $request, Bus_booking $booking)
     {
         //
     }

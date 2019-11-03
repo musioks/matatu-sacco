@@ -56,6 +56,10 @@
               </li>
               <li><a href="{{url('/member/loans')}}"><i  class="fa fa-money"></i><span>My Loans</span></a>
             </li>
+              <li><a href="{{url('/member/shares')}}"><i  class="fa fa-shekel"></i><span>My Shares</span></a>
+              </li>
+              <li><a href="{{url('/member/insurance')}}"><i  class="fa fa-list-ul"></i><span>My Insurance</span></a>
+              </li>
 
           </ul>
         </section>

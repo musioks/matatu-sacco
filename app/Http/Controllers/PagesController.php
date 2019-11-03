@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Bus;
 use App\Bus_booking;
+use App\Helpers\MemberStatus;
 use App\Member;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
@@ -52,20 +53,37 @@ class PagesController extends Controller
 
     public function signin(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
             'email' => 'required',
             'password' => 'required',
         ]);
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
         try {
-            if (Sentinel::authenticate($request->all())) {
+            //dd(Sentinel::authenticate($credentials));
+            if (Sentinel::authenticate($credentials)) {
                 $slug = Sentinel::getUser()->roles()->first()->slug;
+                // dd($slug);
+                $member = Member::where('user_id', Sentinel::getUser()->getUserId())->first();
+                //dd(Sentinel::getUser()->getUserId());
                 if ($slug == 'admin') {
                     return redirect('/dashboard');
-                } elseif ($slug == 'member') {
-                    return redirect('/member');
+                } else if ($slug == 'member') {
+                    if ($member->member_status_id == MemberStatus::approved()->id) {
+                        return redirect('/member');
+                    } else {
+                        return redirect()->back()->with('error', 'your account is inactive!');
+                    }
+
+                }
+                elseif($slug =='customer'){
+                    return redirect('/');
                 }
             } else {
-                return redirect()->back()->with('error', 'wrong credentials!');
+                return redirect()->back()->with('error', 'wrong credentials, or you account is inactive!');
             }
         } catch (ThrottlingException $e) {
             $delay = $e->getDelay();
@@ -116,7 +134,19 @@ class PagesController extends Controller
             $role = Sentinel::findRoleBySlug('member');
             $role->users()->attach($user);
 
+            $logbook_file = "";
+            $vehicle_image_file = "";
             $member = new Member;
+            if ($request->hasFile('vehicle_image')) {
+                $file = $request->file('vehicle_image');
+                $vehicle_image_file = time() . '.' . $file->getClientOriginalExtension();
+                $request->vehicle_image->move('members/vehicles/', $vehicle_image_file);
+            }
+            if ($request->hasFile('logbook')) {
+                $file = $request->file('logbook');
+                $logbook_file = time() . '.' . $file->getClientOriginalExtension();
+                $request->logbook->move('members/logbooks/', $logbook_file);
+            }
             $member->user_id = $user->id;
             $member->fname = $request->fname;
             $member->lname = $request->lname;
@@ -127,6 +157,9 @@ class PagesController extends Controller
             $member->residence = $request->residence;
             $member->nok = $request->nok;
             $member->relationship = $request->relationship;
+            $member->member_status_id = MemberStatus::pending()->id;
+            $member->logbook = $logbook_file;
+            $member->vehicle_image = $vehicle_image_file;
             $member->save();
         });
         return redirect('/')->with('success', 'Member Account Created Successfully!.');

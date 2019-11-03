@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
         $data = [
             'name' => 'System Admin',
             'email' => 'system@admin.com',
-            'password' => bcrypt('admin1234'),
+            'password' => 'admin1234',
         ];
 
         $user = Sentinel::registerAndActivate($data);
