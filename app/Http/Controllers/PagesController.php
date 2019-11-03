@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Bus;
 use App\Bus_booking;
+use App\Customer;
 use App\Helpers\MemberStatus;
 use App\Member;
 use Carbon\Carbon;
@@ -15,20 +16,25 @@ use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
+    public function bookings(){
+        $user=Sentinel::getUser()->getUserId();
+        $customer=Customer::where('user_id',$user)->first();
+        //dd($customer);
+        $bookings=Bus_booking::where('customer_id',$customer->id)->latest()->get();
+        return view('bookings',compact('bookings'));
+    }
     public function hireBus(Request $request)
     {
+        //dd($request->all());
         try {
             $data = [
                 'bus_id' => $request->bus_id,
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
+                'customer_id' => $request->customer_id,
                 'purpose' => $request->purpose,
                 'from_date' => $request->from_date,
                 'to_date' => $request->to_date,
             ];
             $booking_exists = DB::table('bus_bookings')
-                ->where('status', 1)
                 ->where('bus_id', $data['bus_id'])
                 ->whereBetween(DB::raw('from_date AND to_date'), [$request->from_date, $request->to_date])
                 ->get();
@@ -46,7 +52,8 @@ class PagesController extends Controller
 
     public function login()
     {
-        $buses = Bus::paginate(4);
+        $bus_exists=Bus_booking::all()->pluck('bus_id');
+        $buses = Bus::whereNotIn('id',$bus_exists)->paginate(4);
         // dd($buses);
         return view('login', compact('buses'));
     }
@@ -78,8 +85,7 @@ class PagesController extends Controller
                         return redirect()->back()->with('error', 'your account is inactive!');
                     }
 
-                }
-                elseif($slug =='customer'){
+                } elseif ($slug == 'customer') {
                     return redirect('/');
                 }
             } else {
@@ -106,6 +112,38 @@ class PagesController extends Controller
     public function register()
     {
         return view('register');
+    }
+
+    public function customerCreate(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'nid' => 'required',
+            'phone' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required|confirmed'
+        ]);
+        $full_name = $request->name;
+        $logins = [
+            'name' => $full_name,
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+
+        $user = Sentinel::registerAndActivate($logins);
+        $role = Sentinel::findRoleBySlug('customer');
+        $role->users()->attach($user);
+
+        $customer = new Customer();
+        $customer->user_id = $user->id;
+        $customer->name = $request->name;
+        $customer->nid = $request->nid;
+        $customer->phone = $request->phone;
+        $customer->email = $request->email;
+        $customer->save();
+
+        return redirect('/')->with('success', 'Customer Account Created Successfully!.');
+
     }
 
     public function create(Request $request)

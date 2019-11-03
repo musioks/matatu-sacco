@@ -16,7 +16,7 @@
                                     <input class="form-control" id="reg_no"
                                            name="name"
                                            type="text"
-                                           value="{{$booking->name}}" disabled>
+                                           value="{{$booking->customer->name}}" disabled>
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -24,7 +24,7 @@
                                     <label for="model">Email Address</label>
                                     <input class="form-control" id="model"
                                            type="email"
-                                           value="{{$booking->email}}" disabled>
+                                           value="{{$booking->customer->email}}" disabled>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -35,7 +35,7 @@
                                     <input class="form-control" id="capacity"
                                            name="phone"
                                            type="text"
-                                           value="{{$booking->phone ?? ''}}" disabled>
+                                           value="{{$booking->customer->phone ?? ''}}" disabled>
                                 </div>
                             </div>
                         </div>

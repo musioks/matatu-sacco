@@ -22,7 +22,7 @@
                     <tr>
                       <td>{{$loop->iteration}}</td>
                       <td>{{$booking->bus->number_plate ?? ''}}</td>
-                      <td>{{$booking->name ?? ''}}</td>
+                      <td>{{$booking->customer->name ?? ''}}</td>
                       <td>{{$booking->from_date ?? ''}}</td>
                       <td>{{$booking->to_date ?? ''}}</td>
                       <td>{{$booking->purpose ?? ''}}</td>

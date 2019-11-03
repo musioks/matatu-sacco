@@ -13,6 +13,8 @@
 
 //Route::get('/','PagesController@index')->name('index');
 Route::get('/hire','PagesController@hire')->name('hire');
+Route::get('/my-bookings','PagesController@bookings')->middleware('customer');
+Route::post('/customer/join','PagesController@customerCreate');
 Route::post('/hire-bus','PagesController@hireBus');
 Route::get('/','PagesController@login')->name('login');
 Route::post('/login','PagesController@signin')->name('signin');
